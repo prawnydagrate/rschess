@@ -33,7 +33,7 @@ impl TryFrom<&str> for Fen {
     /// **Shredder-FEN is NOT supported**.
     fn try_from(fen: &str) -> Result<Self, Self::Error> {
         let mut content = [None; 64];
-        let fields: Vec<_> = fen.split(' ').collect();
+        let fields: Vec<_> = fen.trim().split(' ').collect();
         let nfields = fields.len();
         if nfields != 6 {
             return Err(InvalidFenError::SixFields);

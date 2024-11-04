@@ -1,9 +1,9 @@
 [package]
 name = "rschess"
-version = "2.0.1"
+version = "2.0.2"
 edition = "2021"
 description = "A Rust chess library with the aim to be as feature-rich as possible"
-repository = "https://github.com/Python3-8/rschess"
+repository = "https://github.com/prawnydagrate/rschess"
 keywords = ["chess", "pgn", "fen", "uci", "san"]
 license = "MIT"
 

@@ -1,4 +1,4 @@
-# rschess [![Made with Rust](https://img.shields.io/badge/made_with-rust-blue?&logo=rust)](https://rust-lang.org) [![Crates.io Version](https://img.shields.io/crates/v/rschess?logo=rust)](https://crates.io/crates/rschess) [![Crates.io Total Downloads](https://img.shields.io/crates/d/rschess?logo=rust&link=https%3A%2F%2Fcrates.io%2Fcrates%2Frschess)](https://crates.io/crates/rschess) ![Crates.io License](https://img.shields.io/crates/l/rschess) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/Python3-8/rschess)
+# rschess [![Made with Rust](https://img.shields.io/badge/made_with-rust-blue?&logo=rust)](https://rust-lang.org) [![Crates.io Version](https://img.shields.io/crates/v/rschess?logo=rust)](https://crates.io/crates/rschess) [![Crates.io Total Downloads](https://img.shields.io/crates/d/rschess?logo=rust&link=https%3A%2F%2Fcrates.io%2Fcrates%2Frschess)](https://crates.io/crates/rschess) ![Crates.io License](https://img.shields.io/crates/l/rschess) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/prawnydagrate/rschess)
 A Rust chess library with the aim to be as feature-rich as possible
 
 ## Table of Contents
@@ -17,6 +17,7 @@ A Rust chess library with the aim to be as feature-rich as possible
   * [Position to image](#position-to-image)
     * [Image properties](#image-properties)
     * [Custom piece sets](#custom-piece-sets)
+* [Examples](#examples)
 * [History](#history)
 ## Aim
 This project aims to be as feature-rich as possible, **at the cost of performance (this may change in the future)**. There are surprisingly very few Rust crates that offer enough features for use in applications related to chess. With rschess I strive to create a library that offers all the necessary functionalities for the development of chess software.
@@ -32,7 +33,7 @@ let starting_position = Board::default(); // equivalent to Board::from_fen("rnbq
 To use PGN, you must first enable the `pgn` feature in `Cargo.toml`:
 ```toml
 [dependencies]
-rschess = { git = "https://github.com/Python3-8/rschess.git", features = ["pgn"] }
+rschess = { git = "https://github.com/prawnydagrate/rschess.git", features = ["pgn"] }
 ```
 <details>
   <summary><em>Carlsen-Karjakin_WCC2016_R13_4.pgn</em></summary>
@@ -151,7 +152,7 @@ assert_eq!(fen.to_string(), "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq 
 Here too, to use PGN, you must first enable the `pgn` feature in `Cargo.toml`:
 ```toml
 [dependencies]
-rschess = { git = "https://github.com/Python3-8/rschess.git", features = ["pgn"] }
+rschess = { git = "https://github.com/prawnydagrate/rschess.git", features = ["pgn"] }
 ```
 #### From PGN text
 <details>
@@ -355,7 +356,7 @@ println!("{}", board.pretty_print(Color::White));
 To use this feature, you must first enable the `img` feature in `Cargo.toml`:
 ```toml
 [dependencies]
-rschess = { git = "https://github.com/Python3-8/rschess.git", features = ["img"] }
+rschess = { git = "https://github.com/prawnydagrate/rschess.git", features = ["img"] }
 ```
 Now, the `position_to_image` function can be used like so:
 ```rust
@@ -374,7 +375,7 @@ img::position_to_image(
 <details>
   <summary><em>Carlsen-Karjakin_WCC2016_R13_4.png</em></summary>
 
-  ![Carlsen-Karjakin_WCC2016_R13_4](https://github.com/Python3-8/rschess/assets/66139317/da93f0c2-eb52-453d-8e76-609eefc55167)
+  ![Carlsen-Karjakin_WCC2016_R13_4](https://github.com/prawnydagrate/rschess/assets/66139317/da93f0c2-eb52-453d-8e76-609eefc55167)
 </details>
 
 #### Image properties
@@ -415,6 +416,17 @@ for fname in std::fs::read_dir("pieces").unwrap() {
 }
 pip.piece_set = img::PieceSet::Custom(hm);
 img::position_to_image(board.position(), pip, Color::Black).unwrap().save("dtz1033.png").unwrap();
+```
+
+## Examples
+The `examples` directory features some examples of programs that rschess could be used to make. To try them, clone the GitHub repository:
+```sh
+$ git clone https://github.com/prawnydagrate/rschess
+$ cd rschess
+```
+Then run:
+```sh
+$ cargo run --release --example EXAMPLENAME
 ```
 
 ## History
