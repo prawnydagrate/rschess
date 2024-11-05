@@ -282,7 +282,9 @@ impl Position {
     }
 
     /// Pretty-prints the position to a string, from the perspective of the side `perspective`.
-    pub fn pretty_print(&self, perspective: Color) -> String {
+    /// If `ascii` is `true`, this function uses piece characters like 'K' and 'p' instead of
+    /// characters like '♔' and '♟'.
+    pub fn pretty_print(&self, perspective: Color, ascii: bool) -> String {
         let mut string = String::new();
         let mut content = self.content;
         let ranks: Vec<_> = if perspective.is_white() {
@@ -302,14 +304,25 @@ impl Position {
             }
             string += &format!("{} │", if perspective.is_white() { 8 - ranki } else { ranki + 1 },);
             for occupant in rank.iter() {
-                string += &format!(" {} │", if let Some(p) = occupant { format!("{p}").chars().next().unwrap() } else { ' ' });
+                string += &format!(
+                    " {} │",
+                    if let Some(p) = occupant {
+                        if ascii {
+                            (*p).into()
+                        } else {
+                            p.to_string().chars().next().unwrap()
+                        }
+                    } else {
+                        ' '
+                    }
+                );
             }
             string.push('\n');
         }
         string += &("  ".to_owned() + "└" + &"───┴".repeat(7) + "───┘\n");
         let mut files = vec![" "];
         files.extend(file_names);
-        string += &(files.join(" │ ") + "  ");
+        string += &(files.join("   ") + "  ");
         string
     }
 
@@ -553,6 +566,7 @@ impl Position {
             pseudolegal_moves
         }
     }
+
     /// Generates pseudolegal moves for a long-range piece.
     pub(crate) fn gen_long_range_piece_pseudolegal_moves(&self, sq: usize, piece_type: PieceType) -> Vec<Move> {
         let Self { content, side, .. } = self;
@@ -672,7 +686,7 @@ impl Position {
 impl fmt::Display for Position {
     /// Pretty-prints the position from the perspective of the side whose turn it is to move.
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", self.pretty_print(self.side))
+        write!(f, "{}", self.pretty_print(self.side, false))
     }
 }
 

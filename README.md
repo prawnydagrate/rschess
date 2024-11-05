@@ -316,7 +316,7 @@ println!("{board}");
   ‎  ├───┼───┼───┼───┼───┼───┼───┼───┤
   8 │   │   │   │   │   │ ♖ │   │   │
   ‎  └───┴───┴───┴───┴───┴───┴───┴───┘
-  ‎  │ h │ g │ f │ e │ d │ c │ b │ a
+  ‎    h   g   f   e   d   c   b   a
   ```
 </details>
 
@@ -325,7 +325,7 @@ Pretty-printing the position from the perspective of a specific side:
 use rschess::{Board, Color};
 
 let board = Board::from_fen("2R5/4bppk/1p1p3Q/5R1P/4P3/5P2/r4q1P/7K b - - 6 50".try_into().unwrap());
-println!("{}", board.pretty_print(Color::White));
+println!("{}", board.pretty_print(Color::White, false));
 ```
 <details>
   <summary>Output</summary>
@@ -348,7 +348,39 @@ println!("{}", board.pretty_print(Color::White));
   ‎  ├───┼───┼───┼───┼───┼───┼───┼───┤
   1 │   │   │   │   │   │   │   │ ♔ │
   ‎  └───┴───┴───┴───┴───┴───┴───┴───┘
-  ‎  │ a │ b │ c │ d │ e │ f │ g │ h
+  ‎    a   b   c   d   e   f   g   h
+  ```
+</details>
+
+Pretty-printing the position with ASCII piece characters:
+```rust
+use rschess::{Board, Color};
+
+let board = Board::from_fen("2R5/4bppk/1p1p3Q/5R1P/4P3/5P2/r4q1P/7K b - - 6 50".try_into().unwrap());
+println!("{}", board.pretty_print(Color::Black, true));
+```
+<details>
+  <summary>Output</summary>
+
+  ```
+  ‎  ┌───┬───┬───┬───┬───┬───┬───┬───┐
+  1 │ K │   │   │   │   │   │   │   │
+  ‎  ├───┼───┼───┼───┼───┼───┼───┼───┤
+  2 │ P │   │ q │   │   │   │   │ r │
+  ‎  ├───┼───┼───┼───┼───┼───┼───┼───┤
+  3 │   │   │ P │   │   │   │   │   │
+  ‎  ├───┼───┼───┼───┼───┼───┼───┼───┤
+  4 │   │   │   │ P │   │   │   │   │
+  ‎  ├───┼───┼───┼───┼───┼───┼───┼───┤
+  5 │ P │   │ R │   │   │   │   │   │
+  ‎  ├───┼───┼───┼───┼───┼───┼───┼───┤
+  6 │ Q │   │   │   │ p │   │ p │   │
+  ‎  ├───┼───┼───┼───┼───┼───┼───┼───┤
+  7 │ k │ p │ p │ b │   │   │   │   │
+  ‎  ├───┼───┼───┼───┼───┼───┼───┼───┤
+  8 │   │   │   │   │   │ R │   │   │
+  ‎  └───┴───┴───┴───┴───┴───┴───┴───┘
+  ‎    h   g   f   e   d   c   b   a
   ```
 </details>
 

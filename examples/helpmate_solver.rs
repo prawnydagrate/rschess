@@ -1,6 +1,7 @@
-/// # A [helpmate](https://en.wikipedia.org/wiki/Helpmate) solver using rschess
-/// **NOTE**: rschess prioritizes feature-richness and ease of use over performance,
-/// which makes it unsuitable for this purpose.
+//! # A [helpmate](https://en.wikipedia.org/wiki/Helpmate) solver using rschess
+//! **NOTE**: rschess prioritizes feature-richness and ease of use over performance,
+//! which makes it unsuitable for this purpose.
+
 use rschess::{Board, Fen};
 use std::{
     env, fmt,

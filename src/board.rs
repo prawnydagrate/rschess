@@ -300,8 +300,10 @@ impl Board {
     }
 
     /// Pretty-prints the position to a string, from the perspective of the side `perspective`.
-    pub fn pretty_print(&self, perspective: Color) -> String {
-        self.position.pretty_print(perspective)
+    /// If `ascii` is `true`, this function uses piece characters like 'K' and 'p' instead of
+    /// characters like '♔' and '♟'.
+    pub fn pretty_print(&self, perspective: Color, ascii: bool) -> String {
+        self.position.pretty_print(perspective, ascii)
     }
 
     /// Returns which side's turn it is to move.
