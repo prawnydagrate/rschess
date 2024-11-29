@@ -3,20 +3,7 @@
 //! which makes it unsuitable for this purpose.
 
 use rschess::{Board, Fen};
-use std::{
-    env, fmt,
-    io::{self, Error as IoError, Write},
-    process,
-    time::Instant,
-};
-
-fn input(prompt: &str) -> Result<String, IoError> {
-    print!("{prompt}");
-    let _ = io::stdout().flush();
-    let mut resp = String::new();
-    io::stdin().read_line(&mut resp)?;
-    Ok(resp)
-}
+use std::{env, fmt, process, time::Instant};
 
 fn error<T: fmt::Display>(e: T) -> ! {
     eprintln!("{e}");

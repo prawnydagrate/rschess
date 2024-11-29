@@ -17,3 +17,6 @@ thiserror = "1.0.61"
 [features]
 pgn = ["dep:regex"]
 img = ["dep:image", "dep:include_dir", "dep:nsvg"]
+
+[dev-dependencies]
+rand = "0.8.5"

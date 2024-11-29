@@ -930,6 +930,7 @@ dependencies = [
  "image 0.25.1",
  "include_dir",
  "nsvg",
+ "rand",
  "regex",
  "thiserror",
 ]
