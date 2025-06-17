@@ -34,7 +34,7 @@ pub fn idx_to_sq(idx: usize) -> Result<(char, char), InvalidSquareIndexError> {
 
 /// Converts a square name to a square index, returning an error if the square name is invalid.
 pub fn sq_to_idx(file: char, rank: char) -> Result<usize, InvalidSquareNameError> {
-    if !(('a'..'h').contains(&file) && ('1'..'8').contains(&rank)) {
+    if !(('a'..='h').contains(&file) && ('1'..='8').contains(&rank)) {
         return Err(InvalidSquareNameError(file, rank));
     }
     Ok(helpers::sq_to_idx(file, rank))
