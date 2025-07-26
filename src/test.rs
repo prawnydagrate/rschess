@@ -329,6 +329,25 @@ fn valid_make_move_san() {
     println!("\n{}", board.pretty_print(Color::White, true));
 }
 
+#[test]
+fn to_fen_castling_rights_on_rook_interruption() {
+    let mut bq_board = Board::from_fen(Fen::try_from("r3k3/8/1r6/8/8/8/8/7K b q - 0 2").unwrap());
+    bq_board.make_move_uci("b6b8").unwrap();
+    assert_eq!(bq_board.to_fen().to_string(), "rr2k3/8/8/8/8/8/8/7K w a - 1 2");
+
+    let mut bk_board = Board::from_fen(Fen::try_from("4k2r/8/6r1/8/8/8/8/K7 b k - 0 2").unwrap());
+    bk_board.make_move_uci("g6g8").unwrap();
+    assert_eq!(bk_board.to_fen().to_string(), "4k1rr/8/8/8/8/8/8/K7 w h - 1 2");
+
+    let mut wq_board = Board::from_fen(Fen::try_from("7k/1R6/8/8/8/8/8/R3K3 w Q - 0 2").unwrap());
+    wq_board.make_move_uci("b7b1").unwrap();
+    assert_eq!(wq_board.to_fen().to_string(), "7k/8/8/8/8/8/8/RR2K3 b A - 1 3");
+
+    let mut wk_board = Board::from_fen(Fen::try_from("k7/6R1/8/8/8/8/8/4K2R w K - 0 2").unwrap());
+    wk_board.make_move_uci("g7g1").unwrap();
+    assert_eq!(wk_board.to_fen().to_string(), "k7/8/8/8/8/8/8/4K1RR b H - 1 3");
+}
+
 #[cfg(feature = "pgn")]
 #[test]
 #[ignore]
