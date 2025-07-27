@@ -61,33 +61,25 @@ impl Position {
         let mut castling_availability = String::new();
         let count_rooks = |rng, color| helpers::count_piece(rng, Piece(PieceType::R, color), content);
         let (wk, bk) = (helpers::find_king(Color::White, content), helpers::find_king(Color::Black, content));
-        if castling_rights[0].is_some() {
+        if let Some(idx) = castling_rights[0] {
             castling_availability.push(if count_rooks(wk + 1..8, Color::White) == 1 {
                 'K'
             } else {
-                helpers::idx_to_sq(castling_rights[0].unwrap()).0.to_ascii_uppercase()
+                helpers::idx_to_sq(idx).0.to_ascii_uppercase()
             });
         }
-        if castling_rights[1].is_some() {
+        if let Some(idx) = castling_rights[1] {
             castling_availability.push(if count_rooks(0..wk, Color::White) == 1 {
                 'Q'
             } else {
-                helpers::idx_to_sq(castling_rights[1].unwrap()).0.to_ascii_uppercase()
+                helpers::idx_to_sq(idx).0.to_ascii_uppercase()
             });
         }
-        if castling_rights[2].is_some() {
-            castling_availability.push(if count_rooks(bk + 1..64, Color::Black) == 1 {
-                'k'
-            } else {
-                helpers::idx_to_sq(castling_rights[2].unwrap()).0
-            });
+        if let Some(idx) = castling_rights[2] {
+            castling_availability.push(if count_rooks(bk + 1..64, Color::Black) == 1 { 'k' } else { helpers::idx_to_sq(idx).0 });
         }
-        if castling_rights[3].is_some() {
-            castling_availability.push(if count_rooks(56..bk, Color::Black) == 1 {
-                'q'
-            } else {
-                helpers::idx_to_sq(castling_rights[2].unwrap()).0
-            });
+        if let Some(idx) = castling_rights[3] {
+            castling_availability.push(if count_rooks(56..bk, Color::Black) == 1 { 'q' } else { helpers::idx_to_sq(idx).0 });
         }
         if castling_availability.is_empty() {
             castling_availability.push('-');
